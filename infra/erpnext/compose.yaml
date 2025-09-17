@@ -17,16 +17,16 @@ services:
   mariadb:
     image: mariadb:${MARIADB_TAG}
     command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
+    - --character-set-server=utf8mb4
+    - --collation-server=utf8mb4_unicode_ci
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
-      - TZ=${TZ}
+    - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    - MYSQL_USER=${DB_USER}
+    - MYSQL_PASSWORD=${DB_PASSWORD}
+    - MYSQL_DATABASE=${DB_NAME}
+    - TZ=${TZ}
     volumes:
-      - db_data:/var/lib/mysql
+    - db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p${DB_ROOT_PASSWORD}"]
       interval: 10s
@@ -36,17 +36,17 @@ services:
 
   redis-cache:
     image: redis:${REDIS_TAG}
-    volumes: [ "redis_cache:/data" ]
+    volumes: ["redis_cache:/data"]
     networks: [erpnext]
 
   redis-queue:
     image: redis:${REDIS_TAG}
-    volumes: [ "redis_queue:/data" ]
+    volumes: ["redis_queue:/data"]
     networks: [erpnext]
 
   redis-socketio:
     image: redis:${REDIS_TAG}
-    volumes: [ "redis_socketio:/data" ]
+    volumes: ["redis_socketio:/data"]
     networks: [erpnext]
 
   backend:
@@ -61,11 +61,11 @@ services:
       redis-socketio:
         condition: service_started
     environment:
-      - TZ=${TZ}
+    - TZ=${TZ}
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - assets:/home/frappe/frappe-bench/sites/assets
-      - logs:/home/frappe/frappe-bench/logs
+    - sites:/home/frappe/frappe-bench/sites
+    - assets:/home/frappe/frappe-bench/sites/assets
+    - logs:/home/frappe/frappe-bench/logs
     networks: [erpnext]
 
   scheduler:
@@ -75,11 +75,11 @@ services:
       backend:
         condition: service_started
     environment:
-      - TZ=${TZ}
+    - TZ=${TZ}
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - assets:/home/frappe/frappe-bench/sites/assets
-      - logs:/home/frappe/frappe-bench/logs
+    - sites:/home/frappe/frappe-bench/sites
+    - assets:/home/frappe/frappe-bench/sites/assets
+    - logs:/home/frappe/frappe-bench/logs
     networks: [erpnext]
 
   queue-default:
@@ -89,11 +89,11 @@ services:
       backend:
         condition: service_started
     environment:
-      - TZ=${TZ}
+    - TZ=${TZ}
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - assets:/home/frappe/frappe-bench/sites/assets
-      - logs:/home/frappe/frappe-bench/logs
+    - sites:/home/frappe/frappe-bench/sites
+    - assets:/home/frappe/frappe-bench/sites/assets
+    - logs:/home/frappe/frappe-bench/logs
     networks: [erpnext]
 
   queue-long:
@@ -103,11 +103,11 @@ services:
       backend:
         condition: service_started
     environment:
-      - TZ=${TZ}
+    - TZ=${TZ}
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - assets:/home/frappe/frappe-bench/sites/assets
-      - logs:/home/frappe/frappe-bench/logs
+    - sites:/home/frappe/frappe-bench/sites
+    - assets:/home/frappe/frappe-bench/sites/assets
+    - logs:/home/frappe/frappe-bench/logs
     networks: [erpnext]
 
   queue-short:
@@ -117,11 +117,11 @@ services:
       backend:
         condition: service_started
     environment:
-      - TZ=${TZ}
+    - TZ=${TZ}
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - assets:/home/frappe/frappe-bench/sites/assets
-      - logs:/home/frappe/frappe-bench/logs
+    - sites:/home/frappe/frappe-bench/sites
+    - assets:/home/frappe/frappe-bench/sites/assets
+    - logs:/home/frappe/frappe-bench/logs
     networks: [erpnext]
 
   socketio:
@@ -133,11 +133,15 @@ services:
       redis-socketio:
         condition: service_started
     environment:
-      - TZ=${TZ}
+    - TZ=${TZ}
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - assets:/home/frappe/frappe-bench/sites/assets
-    networks: [erpnext]
+    - sites:/home/frappe/frappe-bench/sites
+    - assets:/home/frappe/frappe-bench/sites/assets
+    networks:
+      erpnext:
+        aliases:
+        - frappe-socketio
+    container_name: frappe-socketio
 
   erpnext-nginx:
     image: frappe/erpnext:${FRAPPE_TAG}
@@ -148,18 +152,18 @@ services:
       socketio:
         condition: service_started
     environment:
-      - TZ=${TZ}
-      - BACKEND=backend:8000
-      - SOCKETIO=socketio:9000
-      - FRAPPE_SITE_NAME_HEADER=${SITE_NAME}
-      - UPSTREAM_REAL_IP_ADDRESS=127.0.0.1
-      - UPSTREAM_REAL_IP_HEADER=X-Forwarded-For
-      - UPSTREAM_REAL_IP_RECURSIVE=off
-      - PROXY_READ_TIMEOUT=120
-      - CLIENT_MAX_BODY_SIZE=50m
+    - TZ=${TZ}
+    - BACKEND=backend:8000
+    - SOCKETIO=socketio:9000
+    - FRAPPE_SITE_NAME_HEADER=${SITE_NAME}
+    - UPSTREAM_REAL_IP_ADDRESS=127.0.0.1
+    - UPSTREAM_REAL_IP_HEADER=X-Forwarded-For
+    - UPSTREAM_REAL_IP_RECURSIVE=off
+    - PROXY_READ_TIMEOUT=120
+    - CLIENT_MAX_BODY_SIZE=50m
     volumes:
-      - sites:/home/frappe/frappe-bench/sites:ro
-      - assets:/home/frappe/frappe-bench/sites/assets:ro
+    - sites:/home/frappe/frappe-bench/sites:ro
+    - assets:/home/frappe/frappe-bench/sites/assets:ro
     networks:
-      - erpnext
-      - proxy
+    - erpnext
+    - proxy
