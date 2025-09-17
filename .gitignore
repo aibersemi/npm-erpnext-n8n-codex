@@ -1,0 +1,28 @@
+# Umum
+.env
+.env.*
+*.log
+.DS_Store
+*.swp
+*.swo
+
+# Node/JS
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Docker
+data/
+volumes/
+*.tar
+
+# Editor/IDE
+.vscode/
+.idea/
+*.code-workspace
