@@ -10,7 +10,7 @@ COMPOSE_ERP := infra/erpnext/compose.yaml
 status:
 	@echo "== Docker containers =="
 	@docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
-	| awk 'NR==1 || $1 ~ /^(npm|n8n|erpnext-)/'
+	| awk 'NR==1 || $$1 ~ /^(npm|n8n|erpnext-)/'
 
 # NPM
 npm-up:
