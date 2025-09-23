@@ -2,7 +2,7 @@
 
 Monorepo untuk:
 - Nginx Proxy Manager (Docker) → npm.mrmads.shop
-- ERPNext (Docker) → erp.mrmads.shop
+- ERPNext (Docker) → mrmads.shop
 - n8n (Docker) → n8n.mrmads.shop
 - Codex (OpenAI-powered helper, non-Docker)
 
