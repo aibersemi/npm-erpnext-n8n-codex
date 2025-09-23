@@ -18,7 +18,7 @@ ensure_assets() {
   echo "[erpnext-entrypoint] build assets (first-run)"
   # Prepare caches to avoid permission issues
   if id frappe >/dev/null 2>&1; then
-    runuser -u frappe -- bash -lc "mkdir -p ~/.cache/yarn ~/.npm && echo ok" || true
+    runuser -u frappe -- bash -lc "mkdir -p ~/.cache/yarn ~/.npm && echo ok && which yarn || npm install -g yarn || true" || true
     # Ensure env so yarn/npm use frappe's HOME
     runuser -u frappe -- bash -lc "cd '$SITE_DIR' && export HOME=~ && export YARN_CACHE_FOLDER=~/.cache/yarn npm_config_cache=~/.npm && bench build" || true
   else
