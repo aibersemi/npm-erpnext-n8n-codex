@@ -163,7 +163,7 @@ services:
       - sites:/home/frappe/frappe-bench/sites:ro
       - assets:/home/frappe/frappe-bench/sites/assets:ro
     ports:
-      - "8080"
+      - "8080:8080"
     networks:
       - proxy
 
