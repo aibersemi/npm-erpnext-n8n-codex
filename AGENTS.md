@@ -34,3 +34,5 @@ Workspace: ~/projects/npm-erpnext-n8n-codex
 ## Catatan DNS
 - Asumsi A/AAAA record untuk subdomain mengarah ke VPS ini (IPv4 31.97.49.129, IPv6 2a02:4780:59:2c73::1).
 
+## Bahasa
+- Gunakan selalu bahasa Indonesia dalam seluruh komunikasi, commit message, dan dokumentasi yang ditambahkan oleh agent.
