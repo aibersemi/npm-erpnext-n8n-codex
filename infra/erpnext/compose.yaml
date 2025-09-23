@@ -61,7 +61,7 @@ services:
       - assets:/home/frappe/frappe-bench/sites/assets
       - logs:/home/frappe/frappe-bench/logs
     # Pastikan aset terbangun: jalankan bench build saat start jika belum ada CSS
-    entrypoint: ["bash", "-lc", "if ls /home/frappe/frappe-bench/sites/assets/css/*.css >/dev/null 2>&1; then echo '[erpnext-backend] assets css sudah ada, skip build'; else echo '[erpnext-backend] build assets (first-run)'; su -s /bin/bash -c 'cd /home/frappe/frappe-bench && bench build || true' frappe; fi; /entrypoint.sh"]
+    entrypoint: ["bash", "-lc", "if ls /home/frappe/frappe-bench/sites/assets/css/*.css >/dev/null 2>&1; then echo '[erpnext-backend] assets css sudah ada, skip build'; else echo '[erpnext-backend] build assets (first-run)'; gosu frappe bash -lc 'cd /home/frappe/frappe-bench && bench build || true'; fi; exec tini -g -- bench server"]
 
   scheduler:
     image: frappe/erpnext:${FRAPPE_TAG}
