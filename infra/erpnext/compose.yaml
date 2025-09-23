@@ -163,6 +163,8 @@ services:
   erpnext-nginx:
     image: frappe/erpnext:${FRAPPE_TAG}
     command: nginx-entrypoint.sh
+    ports:
+    - "8080"
     depends_on:
       backend:
         condition: service_started
