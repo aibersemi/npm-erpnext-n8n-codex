@@ -17,13 +17,11 @@ Workspace: ~/projects/npm-erpnext-n8n-codex
 
 ## Kebiasaan eksekusi
 - Boleh langsung baca, tulis & eksekusi (Full Access).
-- Kerjakan semua instruksi user, validasi sampai normal, jika belum normal perbaiki kembali, jika normal dan beres tampilkan ringkas hasilnya.
-- Tidak perlu banyak konfirmasi, pilih yang menurut kamu paling baik, selesaikan semua baru lapor.
+- Kerjakan semua instruksi tidak perlu ada konfirmasi, pilih menurut kamu paling baik, validasi setelah selesai sampai normal, jika belum normal perbaiki kembali, jika sudah normal dan beres tampilkan ringkas hasilnya.
 - Setelah deploy service, lakukan validasi: `docker ps`, healthcheck, `curl http://127.0.0.1:<port>`.
 
 ## Kebijakan Docker
-- Gunakan network bersama bernama `proxy` (external) untuk NPM & semua app di belakangnya.
-- NPM (jc21/nginx-proxy-manager:latest) port: 80, 81 (UI), 443. Volume di `infra/nginx-proxy-manager/`.
+- NPM (jc21/nginx-proxy-manager:latest) port: 80, 443. Volume di `infra/nginx-proxy-manager/`.
 - n8n (n8nio/n8n:latest), jalankan di belakang NPM. Atur `WEBHOOK_URL`/`N8N_HOST` sesuai domain. Volume di `infra/n8n/`.
 - ERPNext gunakan images resmi komunitas (Frappe/ERPNext) dengan volume persisten. Jangan ekspose DB keluar.
 

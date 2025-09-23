@@ -14,7 +14,10 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     networks:
       - proxy
+      - erpnext_default
 
 networks:
   proxy:
+    external: true
+  erpnext_default:
     external: true
