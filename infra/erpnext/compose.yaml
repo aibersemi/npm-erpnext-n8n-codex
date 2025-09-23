@@ -150,6 +150,7 @@ services:
     environment:
     - TZ=${TZ}
     - REDIS_URL=redis://redis-socketio:6379
+    - SOCKETIO_REDIS_URL=redis://redis-socketio:6379
     volumes:
     - sites:/home/frappe/frappe-bench/sites
     - assets:/home/frappe/frappe-bench/sites/assets
