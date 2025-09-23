@@ -13,6 +13,9 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends nodejs; \
     npm install -g yarn; \
+    ln -sf /usr/bin/node /usr/local/bin/node; \
+    ln -sf /usr/bin/npm /usr/local/bin/npm; \
+    ln -sf /usr/local/bin/yarn /usr/bin/yarn || true; \
     apt-get clean; rm -rf /var/lib/apt/lists/*
 
 # Prepare entrypoint wrapper to build assets on first run
@@ -22,4 +25,3 @@ RUN chmod +x /usr/local/bin/erpnext-entrypoint.sh
 ENV USE_TINI=1
 
 ENTRYPOINT ["/usr/local/bin/erpnext-entrypoint.sh"]
-
