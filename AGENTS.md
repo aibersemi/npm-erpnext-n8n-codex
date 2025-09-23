@@ -6,7 +6,7 @@ Workspace: ~/projects/npm-erpnext-n8n-codex
 
 ## Tujuan layanan
 - Nginx Proxy Manager (Docker) → npm.mrmads.shop
-- ERPNext (Docker) → erp.mrmads.shop
+- ERPNext (Docker) → mrmads.shop
 - n8n (Docker) → n8n.mrmads.shop
 
 ## Aturan keras
@@ -29,7 +29,11 @@ Workspace: ~/projects/npm-erpnext-n8n-codex
 - Setelah membuat/ubah file: `git add . && git commit -m "<pesan>" && git push`.
 
 ## Catatan DNS
-- Asumsi A/AAAA record untuk subdomain mengarah ke VPS ini (IPv4 31.97.49.129, IPv6 2a02:4780:59:2c73::1).
+- A/AAAA untuk domain mengarah ke VPS ini (IPv4 31.97.49.129, IPv6 2a02:4780:59:2c73::1).
+- Contoh:
+  - mrmads.shop → 31.97.49.129, 2a02:4780:59:2c73::1
+  - npm.mrmads.shop → 31.97.49.129, 2a02:4780:59:2c73::1
+  - n8n.mrmads.shop → 31.97.49.129, 2a02:4780:59:2c73::1
 
 ## Bahasa
 - Gunakan selalu bahasa Indonesia dalam seluruh komunikasi, commit message, dan dokumentasi yang ditambahkan oleh agent.
