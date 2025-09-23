@@ -1,16 +1,4 @@
-services:
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: n8n
-    restart: unless-stopped
-    env_file:
-      - ./.env
-    environment:
-      - TZ=Asia/Jakarta
-    volumes:
-      - ./data:/home/node/.n8n
-    networks:
-      - proxy
+services: {}
 
 networks:
   proxy:
