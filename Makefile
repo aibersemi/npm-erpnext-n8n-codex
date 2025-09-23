@@ -5,7 +5,7 @@ COMPOSE_ERP := infra/erpnext/compose.yaml
 .PHONY: status \
         npm-up npm-down npm-logs \
         n8n-up n8n-down n8n-logs \
-        erp-up erp-down erp-logs
+        erp-up erp-down erp-logs erp-reset
 
 status:
 	@echo "== Docker containers =="
@@ -35,3 +35,7 @@ erp-down:
 	docker compose -f $(COMPOSE_ERP) down
 erp-logs:
 	docker compose -f $(COMPOSE_ERP) logs -f --tail=200
+
+# Reset total data ERPNext (hapus seluruh volumes)
+erp-reset:
+	bash scripts/erp-reset.sh

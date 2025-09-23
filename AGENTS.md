@@ -11,15 +11,14 @@ Workspace: ~/projects/npm-erpnext-n8n-codex
 
 ## Aturan keras
 - Jangan utak-atik firewall (ufw/iptables).
-- Bekerja HANYA di workspace ini.
 - Selalu `git add/commit/push` setiap perubahan dengan pesan jelas.
 - Gunakan Docker & Compose v2. Data persisten di `infra/<svc>/data|volumes`.
-- Jangan buka port selain yang dibutuhkan (80/443/81 dll).
 - Tulis file `.env.example` untuk contoh, **jangan commit** `.env` berisi rahasia.
 
 ## Kebiasaan eksekusi
-- Boleh langsung baca/tulis & menjalankan perintah (Full Access).
-- Kerjakan **satu langkah** per instruksi user. Tampilkan perintah yang dijalankan dan ringkas hasilnya.
+- Boleh langsung baca, tulis & eksekusi (Full Access).
+- Kerjakan semua instruksi user, validasi sampai normal, jika belum normal perbaiki kembali, jika normal dan beres tampilkan ringkas hasilnya.
+- Tidak perlu banyak konfirmasi, pilih yang menurut kamu paling baik, selesaikan semua baru lapor.
 - Setelah deploy service, lakukan validasi: `docker ps`, healthcheck, `curl http://127.0.0.1:<port>`.
 
 ## Kebijakan Docker
